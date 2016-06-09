@@ -7,14 +7,23 @@ class Solution(object):
         """
         #vovels = {'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'}
         vovels = {'A':True, 'E':True, 'I':True, 'O':True, 'U':True, 'a':True, 'e':True, 'i':True, 'o':True, 'u':True}
+        alpList = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z', ',', '.', '!']
+        for alp in alpList:
+            vovels[str.lower(alp)] = False
+            vovels[str.upper(alp)] = False
+
         tmplist = list(s)
         index = 0
         tailIndex = -1
         length = len(tmplist)
+        #########################
+        t0 = time.time()
+        #########################
+                            
         while index + abs(tailIndex) < length:
-            while (index < length) and (tmplist[tailIndex] not in vovels) :
+            while (index < length) and (not vovels[tmplist[tailIndex]]) :
                 index += 1
-            while (abs(tailIndex) <= length) and (tmplist[tailIndex] not in vovels):
+            while (abs(tailIndex) <= length) and (not vovels[tmplist[tailIndex]]):
                 tailIndex -= 1
             if(index + abs(tailIndex) < length):
                 tmp = tmplist[index]
@@ -22,7 +31,12 @@ class Solution(object):
                 tmplist[tailIndex] = tmp
                 index += 1
                 tailIndex -= 1
+
         restr = ""
+        #########################
+        t1 = time.time()
+        print("took %f seconds" % (t1 - t0))
+        #########################
         for alp in tmplist:
             restr = restr + alp
         return restr
