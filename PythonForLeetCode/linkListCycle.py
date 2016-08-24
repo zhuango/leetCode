@@ -41,6 +41,34 @@ class Solution(object):
                 fast = fast.next.next
         return False
 
+    def detectCycle(self, head):
+        cycleNode = None
+        if head == None:
+            return None
+        slow = head
+        if head.next == None:
+            return None
+        fast = head.next.next
+        while not fast == None:
+            if slow == fast:
+                cycleNode = slow
+                break
+            slow = slow.next
+            if fast.next == None :
+                return None
+            else:
+                fast = fast.next.next
+        if cycleNode == None: return None
+        index = head
+        while not index == None:
+            if index == cycleNode: return index
+            cycleIndex = cycleNode.next
+            while not cycleIndex == cycleNode:
+                if cycleIndex == index: return index
+                cycleIndex = cycleIndex.next
+            index = index.next
+        return None
+
 head = None
 for i in range(7):
     newNode = ListNode(i)
@@ -51,16 +79,11 @@ struggleNode = head.next.next
 head.next.next.next.next.next = struggleNode
 
 sol = Solution()
-print(sol.hasCycle(head))
-print(sol.hasCycle(None))
+print((sol.detectCycle(head)).val)
+print(sol.detectCycle(None))
 head = None
 for i in range(7):
     newNode = ListNode(i)
     newNode.next = head
     head = newNode
-print(sol.hasCycle(head))
-
-result = 1
-for i in [2, 3, 4, 1]:
-    result ^= i
-print(result)
+print(sol.detectCycle(head))
