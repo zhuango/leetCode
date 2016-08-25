@@ -6,15 +6,16 @@ class Solution(object):
         :rtype: int
         """
         n = len(nums)
+        if n == 0:
+            return 0
         table = [0 for i in range(n + 2)]
         table[0] = 0
         table[1] = nums[0]
         i = 1
         while i < n:
-            tempMax = 0
-            if nums[i] > nums[i - 1]:
-                tempMax = nums[i] + table[i - 1]
-            
+            table[i + 1] = max(nums[i] + table[i - 1], table[i])
+            i += 1
+        return table[n]
 sol = Solution()
 print(sol.rob([]))
 print(sol.rob([1, 2, 3, 4, 5, 6, 7, 8, 9]))
