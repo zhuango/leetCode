@@ -30,7 +30,7 @@ class Solution(object):
                 isPrime[j] = False
                 j += i
             i += 1
-        count = 0;
+        count = 0
         i = 2
         while i < n:
             if isPrime[i]:
