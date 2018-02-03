@@ -7,27 +7,18 @@ class Solution:
         """
         n = len(nums)
         count = 0
-        length = 1
-        for num in nums:
-            if num < k:
-                count += 1
-        mulResult = list(nums)
-        while length < n:
-            smallThan = False
-            for i in range(length, n):
-                if nums[i] == 1:
-                    if mulResult[i - length] < k:
-                        smallThan = True
-                        count += 1
-                    continue
-                dot = mulResult[i - length] * nums[i]
-                if dot < k:
-                    smallThan = True
-                    count += 1
-                mulResult[i - length] = dot
-            if not smallThan:
-                break
-            length += 1
+        
+        index = 0
+        endIdx = 0
+        ss = 1
+        while endIdx < n:
+            ss *= nums[endIdx]
+            while ss >= k and index <= endIdx:
+                ss /= nums[index]
+                index += 1
+            
+            count += endIdx - index + 1
+            endIdx += 1
         return count
 sol = Solution()
 result = sol.numSubarrayProductLessThanK([10, 5, 2, 6], 100)
