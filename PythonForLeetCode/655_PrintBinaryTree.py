@@ -1,21 +1,32 @@
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 class Solution:
     def printTree(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[str]]
         """
-        lllleft = root
-        rrright = root
-        lCount = 1
-        rCount = 1
-        while lllleft != None:
-            lllleft = lllleft.left
-            lCount *= 2
-        while rrright != None:
-            rrright = rrright.right
-            rCount *= 2
-        count = max([rCount, lCount])
-        count = count * 2 + 1
+        count, level = self.getLevelAndCount(root)
+        strList = [["" for i in range(count)] for j in range(level)]
+        self.writeStr(root, strList, 0, 0, count)
+        return strList
+    def getLevelAndCount(self, root):
+        if root == None:
+            return 0, 0
+        lCount, lLevel = self.getLevelAndCount(root.left)
+        rCount, rLevel = self.getLevelAndCount(root.right)
+        return max([lCount, rCount]) * 2 + 1, max([lLevel, rLevel]) + 1
+    def writeStr(self, root, strList, level, start, end):
+        mid = (start + end) // 2
+        if root != None:
+            strList[level][mid] = str(root.val)
+            self.writeStr(root.left, strList, level + 1, start, mid)
+            self.writeStr(root.right, strList, level + 1, mid, end)
+        
 
 def stringToTreeNode(input):
     input = input.strip()
@@ -50,8 +61,8 @@ def stringToTreeNode(input):
             nodeQueue.append(node.right)
     return root
 
-tree = stringToTreeNode("[1,5,8,9,7,7,8,1]")
+tree = stringToTreeNode("[1,2,3,null,4]")
 
 sol = Solution()
-result = sol.widthOfBinaryTree(tree)
+result = sol.printTree(tree)
 print(result)
