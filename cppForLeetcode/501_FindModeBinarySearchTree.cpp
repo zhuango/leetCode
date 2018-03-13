@@ -10,6 +10,7 @@
 #include <iterator>
 #include <vector>
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -22,16 +23,38 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> findMode(TreeNode* root) {
-        find(root, 0);
+        find(root);
+        return set;
     }
-    void find(TreeNode *root, int count)
+    void find(TreeNode *root)
     {
-        if (count > max)
+        if (root == NULL)
         {
-            max = count;
+            return;
         }
+        find(root->left);
+        if (root->val != prev)
+        {
+            prev = root->val;
+            curMax = 0;
+        }
+        curMax += 1;
+        if (curMax > max)
+        {
+            max = curMax;
+            set.clear();
+            set.push_back(prev);
+        }
+        else if (curMax == max)
+        {
+            set.push_back(prev);
+        }
+        
+        find(root->right);
     }
     private:
+        int curMax = 0;
         int max = 0;
+        int prev = 0;
         vector<int> set;
 };
