@@ -1,5 +1,7 @@
 #include <vector>
 #include <algorithm>
+#include <iostream>
+
 using namespace std;
 
 class Solution {
@@ -31,11 +33,11 @@ public:
                 }
                 if (diff > 0)
                 {
-                    middle -= 1;
+                    start += 1;
                 }
                 else
                 {
-                    start += 1;
+                    middle -= 1;
                 }
             }
             end += 1;
@@ -43,3 +45,11 @@ public:
         return target - result;
     }
 };
+
+int main(void)
+{
+    Solution so;
+    vector<int> nums = {-1, 2, 1, -4};
+    so.threeSumClosest(nums, 1);
+    return 0;
+}
