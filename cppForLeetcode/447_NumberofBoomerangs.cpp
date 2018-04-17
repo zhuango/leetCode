@@ -13,24 +13,14 @@ public:
             for(int j = 0; j < points.size(); ++j)
             {
                 pair<int, int> pair2 = points[j];
-                int f = abs(pair1.first - pair2.first);
-                int s = abs(pair1.second - pair2.second);
+                int f = pair1.first - pair2.first;
+                int s = pair1.second - pair2.second;
                 int distance = f * f + s * s;
-                if (mem[distance] >= 1)
-                {
-                    mem[distance] *= mem[distance] + 1;
-                }
-                else
-                {
-                    mem[distance] = 1;
-                }
+                mem[distance] += 1;
             }
             for(auto &pair : mem)
             {
-                if (pair.second > 1)
-                {
-                    count += pair.second;
-                }
+                count += pair.second * (pair.second - 1);
             }
         }
         return count;
