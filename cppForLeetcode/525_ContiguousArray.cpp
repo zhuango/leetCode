@@ -5,14 +5,23 @@ using namespace std;
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
-        vector<pair<int, int>> count;
-        if(nums[0] == 0) count.push_back({1, 0});
-        else count.push_back({0, 1});
-        for(int i = 1; i < nums.size(); ++i)
+        map<int, int> count;
+        count[0] = -1;
+        int sum = 0;
+        int result = 0;
+        for(int i = 0; i < nums.size(); ++i)
         {
-            if(nums[0]) count.push_back({count.back.first, count.back.second + 1});
-            else count.push_back({count.back.first + 1, count.back.second});
+            if (nums[i]) sum += 1;
+            else sum -= 1;
+            if(count.find(sum) != count.end())
+            {
+                result = max(result, i - count[sum]);
+            }
+            else
+            {
+                count[sum] = i;
+            }
         }
-        
+        return result;
     }
 };
