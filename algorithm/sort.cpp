@@ -31,7 +31,7 @@ void quickSort(vector<int> &num, int start, int end)
 
 void adjustHeap(vector<int> &num, int i, int n)
 {
-    while((i+1)*2 < n)
+    while(i*2 + 1 < n)
     {
         int left = i * 2 + 1;
         int right = left + 1;
@@ -55,6 +55,7 @@ void buildHeap(vector<int> &num)
 void heapSort(vector<int> &num)
 {
     buildHeap(num);
+    cout << num[0] <<endl;
     for(int i = num.size() - 1; i >= 0; --i)
     {
         swap(num[i], num[0]);
@@ -64,7 +65,8 @@ void heapSort(vector<int> &num)
 
 int main(void)
 {
-    vector<int> input = {23, 12, 4, 312, 4, 12, 65,2, 23};
+    //vector<int> input = {23, 12, 4, 312, 4, 12, 65,2, 23};
+    vector<int> input = {1, 2};
     //quickSort(input, 0, input.size());
     heapSort(input);
     for(int i : input)
