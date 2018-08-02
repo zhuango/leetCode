@@ -12,8 +12,6 @@ def tf(document, spliter = "  "):
     l = len(words)
     for word in words:
         wordCount[word] += 1
-    for word in wordCount:
-        wordCount[word] = wordCount[word]
     return wordCount
 
 def idf(documents, smooth_idf = True, spliter = "  "):
