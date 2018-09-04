@@ -1,7 +1,7 @@
 import sys
 import math
 
-good = {"high", "great", "good", "easy", "worth", "cheap", "convenient" ,"fun", "cost-effective", "like", "ok", "fresh", "value", ""}
+good = {"high", "great", "good", "easy", "worth", "cheap", "convenient" ,"fun", "cost-effective", "like", "ok", "fresh", "value"}
 bad = {"expensive", "inconvenient", "never", "bad", "poor"}
 notWord = {"nothing", "don't", "not", "too"}
 
