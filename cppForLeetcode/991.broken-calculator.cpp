@@ -70,6 +70,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <cmath>
 
 using namespace std;
 
@@ -104,6 +105,8 @@ public:
         if (diff != 0)
         {
             stack<int> binx = this->bin(diff);
+            oriStep = abs(oriStep - int(binx.size()) + 1);
+            int step = 2;
             while (!binx.empty())
             {
                 int i = binx.top();
@@ -112,6 +115,7 @@ public:
                 {
                     oriStep += 1;
                 }
+                oriStep += 1;
             }
         }
 
