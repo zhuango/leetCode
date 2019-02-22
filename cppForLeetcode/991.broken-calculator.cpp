@@ -99,11 +99,11 @@ public:
             oriStep += 1;
         }
         int diff = X - Y;
+        cout << diff << endl;
+        cout << X << endl;
         if (diff != 0)
         {
             stack<int> binx = this->bin(diff);
-            oriStep = oriStep - binx.size() + 1;
-            int step = 2;
             while (!binx.empty())
             {
                 int i = binx.top();
@@ -112,13 +112,17 @@ public:
                 {
                     oriStep += 1;
                 }
-                oriStep += 1;
             }
-            oriStep -= 1;
-            
         }
 
         return oriStep;
     }
 };
 
+int main(void)
+{
+    Solution sol = Solution();
+    int result = sol.brokenCalc(68, 71);
+    cout << result << endl;
+    return 0;
+}
